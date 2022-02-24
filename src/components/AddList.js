@@ -9,6 +9,7 @@ export default function Addlist() {
   const [optional, setOptional] = useState(true);
   const [customcolor, setCustomColor] = useState("");
   const [forceUpdate, setForceUpdate] = useState(0);
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     axios.post('http://localhost:7777/addCardStat', {
@@ -16,6 +17,7 @@ export default function Addlist() {
       'customcolor': customcolor,
       'name': name,
       'description': description,
+      'fav': 1
     })
     .catch((error) => {
       console.log(error);
