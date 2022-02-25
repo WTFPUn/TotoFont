@@ -10,7 +10,7 @@ export default function ToDoCard({id, custom, title, description, fav, dueDate})
     return (
     <div id={id} className={[custom, "border-2","h-32", "mt-4", "shrink-0 overflow-y-auto rounded-lg bg-[#70767c44] relative"].join(" ")}>
       <div className="absolute right-4 top-2 flex flex-row">
-          <div className={`text-sm flex flex-row w-1/8 bg-[#4e535844] rounded-md p-1 border-2 ${checkLate > 0 ? "border-[#383b3f44]" : "border-red-600"}`}>
+          <div className={`text-sm flex flex-row w-1/8 bg-[#4e535844] rounded-md p-1 border-2 mr-2 ${checkLate > 0 ? "border-white" : "border-red-600"}`}>
             <p className="font-bold">Date: </p>
             <p className={`${checkLate > 0 ? "text-white" : "text-red-600 text-center"}`}>{dueDate}</p>
           </div>
