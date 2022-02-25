@@ -4,20 +4,26 @@ import ToDoCard from "./ToDoCard";
 import axios from "axios";
 
 export default function Addlist() {
+
   const [name, setName] = useState("");
   const [description, setDesription] = useState("")
   const [optional, setOptional] = useState(true);
   const [customcolor, setCustomColor] = useState("");
   const [forceUpdate, setForceUpdate] = useState(0);
+  const [dueDate, setDueDate] = useState("")
+  
+
   
   const handleSubmit = (e) => {
+
     e.preventDefault();
     axios.post('http://localhost:7777/addCardStat', {
       'id': Date.now(),
       'customcolor': customcolor,
       'name': name,
       'description': description,
-      'fav': 1
+      'fav': 0,
+      'dueDate': dueDate,
     })
     .catch((error) => {
       console.log(error);
@@ -42,7 +48,7 @@ export default function Addlist() {
     }
   };
   return (
-    <div className="flex flex-col w-2/5 h-full px-8 flex-nowrap overflow-auto border-r-4 my-8">
+    <div className="flex flex-col w-3/5 h-full px-8 flex-nowrap overflow-auto border-r-4 my-8">
       <form className="text-base flex flex-col flex-nowrap" onSubmit={handleSubmit}>
         <label className="text-slate-100 mb-2">List Name</label>
         <input
@@ -82,11 +88,14 @@ export default function Addlist() {
         Blue
       </RadioGroup.Option>
     </RadioGroup>
-    <button className="border-2 border-[#3BD16F] bg-transparent text-[#3BD16F] hover:bg-[#3BD16F] hover:text-white text-lg mt-4 ml-auto w-1/3" >+ Add</button>
+    <div className="flex flex-row">
+      <input className="text-black rounded-md mt-4 mr-2 w-2/5" value={dueDate} onChange={(e) => {setDueDate(e.target.value)}} type="date"/>
+      <button className="border-2 border-[#3BD16F] bg-transparent text-[#3BD16F] hover:bg-[#3BD16F] hover:text-white text-lg mt-4 ml-auto w-1/3" >+ Add</button>
+    </div>
       </form>
       <div className="text-base font-semibold mt-4">Example</div>
       <div className="flex flex-col flex-nowrap justify-items-center overflow-x-auto gap-1 scroll-smooth">
-        <ToDoCard id={0} custom={customcolor} title={name} description={description}/>
+        <ToDoCard id={0} custom={customcolor} title={name} description={description} dueDate={dueDate}/>
       </div>
     </div>
   );
